@@ -205,9 +205,9 @@ export default function Home() {
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
@@ -244,7 +244,7 @@ function Meeting({ meeting }: any) {
   let endDateTime = parseISO(meeting.endDatetime);
 
   return (
-    <li className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-100">
+    <li className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-lightPrimary hover:bg-lightPrimary">
       <img
         src={meeting.imageUrl}
         alt=""
@@ -253,11 +253,11 @@ function Meeting({ meeting }: any) {
       <div className="flex-auto">
         <p className="text-primary">{meeting.name}</p>
         <p className="mt-0.5">
-          <time dateTime={meeting.startDatetime}>
+          <time className="text-primary" dateTime={meeting.startDatetime}>
             {format(startDateTime, "h:mm a")}
           </time>{" "}
           -{" "}
-          <time dateTime={meeting.endDatetime}>
+          <time className="text-primary" dateTime={meeting.endDatetime}>
             {format(endDateTime, "h:mm a")}
           </time>
         </p>
@@ -267,8 +267,8 @@ function Meeting({ meeting }: any) {
         className="relative opacity-0 focus-within:opacity-100 group-hover:opacity-100"
       >
         <div>
-          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
-            <span className="sr-only">Open options</span>
+          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-primary hover:text-primary">
+            <span className="sr-only text-black">Open options</span>
             <AdjustmentsVerticalIcon className="h-6 w-6" aria-hidden="true" />
           </Menu.Button>
         </div>
@@ -289,7 +289,7 @@ function Meeting({ meeting }: any) {
                   <a
                     href="#"
                     className={classNames(
-                      active ? "bg-gray-100 text-primary" : "text-secondary",
+                      active ? "bg-primary text-white" : "text-primary",
                       "block px-4 py-2 text-sm"
                     )}
                   >
@@ -302,7 +302,7 @@ function Meeting({ meeting }: any) {
                   <a
                     href="#"
                     className={classNames(
-                      active ? "bg-gray-100 text-primary" : "text-secondary",
+                      active ? "bg-primary  text-white" : "text-primary",
                       "block px-4 py-2 text-sm"
                     )}
                   >
