@@ -106,7 +106,7 @@ export default function Home() {
           <div className=" md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
             <div className="md:pr-14">
               <div className="flex items-center">
-                <h2 className="flex-auto font-semibold text-gray-900">
+                <h2 className="flex-auto font-semibold text-primary">
                   {format(firstDayCurrentMonth, "MMMM yyyy")}
                 </h2>
                 <button
@@ -151,21 +151,21 @@ export default function Home() {
                         isEqual(day, selectedDay) && "text-white",
                         !isEqual(day, selectedDay) &&
                           isToday(day) &&
-                          "text-red-500",
+                          "text-primary",
                         !isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           isSameMonth(day, firstDayCurrentMonth) &&
-                          "text-gray-900",
+                          "text-primary",
                         !isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           !isSameMonth(day, firstDayCurrentMonth) &&
                           "text-gray-400",
                         isEqual(day, selectedDay) &&
                           isToday(day) &&
-                          "bg-red-500",
+                          "bg-primary",
                         isEqual(day, selectedDay) &&
                           !isToday(day) &&
-                          "bg-gray-900",
+                          "bg-primary",
                         !isEqual(day, selectedDay) && "hover:bg-gray-200",
                         (isEqual(day, selectedDay) || isToday(day)) &&
                           "font-semibold",
@@ -181,7 +181,7 @@ export default function Home() {
                       {meetings.some((meeting) =>
                         isSameDay(parseISO(meeting.startDatetime), day)
                       ) && (
-                        <div className="h-1 w-1 rounded-full bg-sky-500"></div>
+                        <div className="h-1 w-1 rounded-full bg-lightPrimary"></div>
                       )}
                     </div>
                   </div>
@@ -189,14 +189,14 @@ export default function Home() {
               </div>
               <div className="mt-4">
                 <a
-                  className="group flex items-center justify-between rounded-lg border border-red-500 bg-red-500 px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring"
+                  className="group flex items-center justify-between rounded-lg border border-primary bg-primary px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring"
                   onClick={handleChange}
                 >
-                  <span className="font-medium text-white transition-colors group-hover:text-red-500 group-active:text-indigo-500">
+                  <span className="font-medium text-white transition-colors group-hover:text-primary group-active:text-secondary">
                     Create
                   </span>
 
-                  <span className="ml-4 flex-shrink-0 rounded-full border border-current bg-white p-2 text-red-500 group-active:text-indigo-500">
+                  <span className="ml-4 flex-shrink-0 rounded-full border border-current bg-white p-2 text-primary group-active:text-secondary">
                     <svg
                       className="h-5 w-5"
                       xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +216,7 @@ export default function Home() {
               </div>
             </div>
             <section className="mt-12 md:mt-0 md:pl-14">
-              <h2 className="font-semibold text-gray-900">
+              <h2 className="font-semibold text-primary">
                 Schedule for{" "}
                 <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
                   {format(selectedDay, "MMM dd, yyy")}
@@ -251,7 +251,7 @@ function Meeting({ meeting }: any) {
         className="h-10 w-10 flex-none rounded-full"
       />
       <div className="flex-auto">
-        <p className="text-gray-900">{meeting.name}</p>
+        <p className="text-primary">{meeting.name}</p>
         <p className="mt-0.5">
           <time dateTime={meeting.startDatetime}>
             {format(startDateTime, "h:mm a")}
@@ -289,7 +289,7 @@ function Meeting({ meeting }: any) {
                   <a
                     href="#"
                     className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      active ? "bg-gray-100 text-primary" : "text-secondary",
                       "block px-4 py-2 text-sm"
                     )}
                   >
@@ -302,7 +302,7 @@ function Meeting({ meeting }: any) {
                   <a
                     href="#"
                     className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      active ? "bg-gray-100 text-primary" : "text-secondary",
                       "block px-4 py-2 text-sm"
                     )}
                   >
