@@ -6,7 +6,7 @@ const Navbar = () => {
       <div className="mx-auto max-w-screen-xl p-4">
         <div className="flex items-center justify-between gap-4 lg:gap-10">
           <div className="flex lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="text-2xl font-semibold">Cal3</span>
               <span className="h-10 w-20 rounded-lg bg-gray-200"></span>
             </a>
