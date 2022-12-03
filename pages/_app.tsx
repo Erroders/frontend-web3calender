@@ -3,6 +3,7 @@ import "../styles/globals.css";
 
 import {
   connectorsForWallets,
+  lightTheme,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -55,11 +56,6 @@ export default function App({ Component, pageProps }: AppProps) {
     ]
   );
 
-  // const { connectors } = getDefaultWallets({
-  //   appName: "My RainbowKit App",
-  //   chains,
-  // });
-
   const connectors = connectorsForWallets([
     {
       groupName: "Recommended",
@@ -97,6 +93,7 @@ export default function App({ Component, pageProps }: AppProps) {
         initialChain={chain.polygonMumbai}
         modalSize="compact"
         coolMode={true}
+        theme={lightTheme()}
       >
         <Component {...pageProps} />
       </RainbowKitProvider>
