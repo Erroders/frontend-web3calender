@@ -1,15 +1,15 @@
 export type PushNotificationFeed = {
-  app: String;
-  blockchain: String;
-  cta: String;
-  icon: String;
-  image: String;
-  message: String;
+  app: string;
+  blockchain: string;
+  cta: string;
+  icon: string;
+  image: string;
+  message: string;
   notification: {
-    body: String;
-    title: String;
+    body: string;
+    title: string;
   };
-  sid: String;
-  title: String;
-  url: String;
+  sid: string;
+  title: string;
+  url: string;
 };
