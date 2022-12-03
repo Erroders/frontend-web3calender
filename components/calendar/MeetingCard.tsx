@@ -66,8 +66,8 @@ const MeetingCard = ({ meeting }: any) => {
                     href="#"
                     className={classNames([
                       active
-                        ? "bg-black text-white"
-                        : "text-black group-hover:text-white",
+                        ? "bg-primary text-white"
+                        : "text-black hover:text-white",
                       "block px-4 py-2 text-sm",
                     ])}
                   >
@@ -81,8 +81,8 @@ const MeetingCard = ({ meeting }: any) => {
                     href="#"
                     className={classNames([
                       active
-                        ? "bg-black  text-white"
-                        : "text-black group-hover:text-white",
+                        ? "bg-primary  text-white"
+                        : "text-black hover:text-white",
                       "block px-4 py-2 text-sm",
                     ])}
                   >

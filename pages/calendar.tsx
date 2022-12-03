@@ -129,7 +129,7 @@ const Calendar = () => {
                   <button
                     type="button"
                     onClick={previousMonth}
-                    className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                    className="text-black-400 hover:text-black-500 -my-1.5 flex flex-none items-center justify-center p-1.5"
                   >
                     <span className="sr-only">Previous month</span>
                     <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -137,13 +137,13 @@ const Calendar = () => {
                   <button
                     onClick={nextMonth}
                     type="button"
-                    className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                    className="text-black-400 hover:text-black-500 -my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5"
                   >
                     <span className="sr-only">Next month</span>
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
                   </button>
                 </div>
-                <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+                <div className="text-black-500 mt-10 grid grid-cols-7 text-center text-xs leading-6">
                   <div>S</div>
                   <div>M</div>
                   <div>T</div>
@@ -152,13 +152,13 @@ const Calendar = () => {
                   <div>F</div>
                   <div>S</div>
                 </div>
-                <div className="mt-2 grid grid-cols-7 text-sm">
+                <div className="mt-2 grid grid-cols-7 text-sm ">
                   {days.map((day, dayIdx) => (
                     <div
                       key={day.toString()}
                       className={classNames([
                         dayIdx === 0 && colStartClasses[getDay(day)],
-                        "py-1.5",
+                        "py-1.5 ",
                       ])}
                     >
                       <button
@@ -168,15 +168,15 @@ const Calendar = () => {
                           isEqual(day, selectedDay) && "text-white",
                           !isEqual(day, selectedDay) &&
                             isToday(day) &&
-                            "text-primary",
+                            "text-black",
                           !isEqual(day, selectedDay) &&
                             !isToday(day) &&
                             isSameMonth(day, firstDayCurrentMonth) &&
-                            "text-primary",
+                            "text-black",
                           !isEqual(day, selectedDay) &&
                             !isToday(day) &&
                             !isSameMonth(day, firstDayCurrentMonth) &&
-                            "text-gray-400",
+                            "text-black-400",
                           isEqual(day, selectedDay) &&
                             isToday(day) &&
                             "bg-primary",
@@ -239,7 +239,7 @@ const Calendar = () => {
                     {format(selectedDay, "MMM dd, yyy")}
                   </time>
                 </h2>
-                <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+                <ol className="text-black-500 mt-4 space-y-1 text-sm leading-6">
                   {selectedDayMeetings.length > 0 ? (
                     selectedDayMeetings.map((meeting) => (
                       <MeetingCard meeting={meeting} key={meeting.id} />
