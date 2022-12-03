@@ -17,6 +17,7 @@ import {
   startOfToday,
 } from "date-fns";
 import { Fragment, useState } from "react";
+import Form from "../components/form/form";
 
 const meetings = [
   {
@@ -69,6 +70,7 @@ export default function Home() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
+  let [visible, setVisible] = useState("collapse");
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
   let days = eachDayOfInterval({
@@ -90,109 +92,147 @@ export default function Home() {
     isSameDay(parseISO(meeting.startDatetime), selectedDay)
   );
 
+  let handleChange = () => {
+    setVisible("visible");
+  };
+
   return (
-    <div className="pt-16">
-      <div className="mx-auto max-w-md px-4 sm:px-7 md:max-w-4xl md:px-6">
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
-            <div className="flex items-center">
-              <h2 className="flex-auto font-semibold text-gray-900">
-                {format(firstDayCurrentMonth, "MMMM yyyy")}
-              </h2>
-              <button
-                type="button"
-                onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-              >
-                <span className="sr-only">Previous month</span>
-                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-              </button>
-              <button
-                onClick={nextMonth}
-                type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-              >
-                <span className="sr-only">Next month</span>
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
-              <div>S</div>
-              <div>M</div>
-              <div>T</div>
-              <div>W</div>
-              <div>T</div>
-              <div>F</div>
-              <div>S</div>
-            </div>
-            <div className="mt-2 grid grid-cols-7 text-sm">
-              {days.map((day, dayIdx) => (
-                <div
-                  key={day.toString()}
-                  className={classNames(
-                    dayIdx === 0 && colStartClasses[getDay(day)],
-                    "py-1.5"
-                  )}
+    <div className="relative ">
+      <div className={`absolute right-0 left-0 top-0  ${visible}`}>
+        <Form />
+      </div>
+      <div className="py-16">
+        <div className=" mx-auto  max-w-md px-4 sm:px-7 md:max-w-4xl md:px-6">
+          <div className=" md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
+            <div className="md:pr-14">
+              <div className="flex items-center">
+                <h2 className="flex-auto font-semibold text-gray-900">
+                  {format(firstDayCurrentMonth, "MMMM yyyy")}
+                </h2>
+                <button
+                  type="button"
+                  onClick={previousMonth}
+                  className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
                 >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDay(day)}
+                  <span className="sr-only">Previous month</span>
+                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                </button>
+                <button
+                  onClick={nextMonth}
+                  type="button"
+                  className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                >
+                  <span className="sr-only">Next month</span>
+                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+                <div>S</div>
+                <div>M</div>
+                <div>T</div>
+                <div>W</div>
+                <div>T</div>
+                <div>F</div>
+                <div>S</div>
+              </div>
+              <div className="mt-2 grid grid-cols-7 text-sm">
+                {days.map((day, dayIdx) => (
+                  <div
+                    key={day.toString()}
                     className={classNames(
-                      isEqual(day, selectedDay) && "text-white",
-                      !isEqual(day, selectedDay) &&
-                        isToday(day) &&
-                        "text-red-500",
-                      !isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        isSameMonth(day, firstDayCurrentMonth) &&
-                        "text-gray-900",
-                      !isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        !isSameMonth(day, firstDayCurrentMonth) &&
-                        "text-gray-400",
-                      isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
-                      isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        "bg-gray-900",
-                      !isEqual(day, selectedDay) && "hover:bg-gray-200",
-                      (isEqual(day, selectedDay) || isToday(day)) &&
-                        "font-semibold",
-                      "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                      dayIdx === 0 && colStartClasses[getDay(day)],
+                      "py-1.5"
                     )}
                   >
-                    <time dateTime={format(day, "yyyy-MM-dd")}>
-                      {format(day, "d")}
-                    </time>
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedDay(day)}
+                      className={classNames(
+                        isEqual(day, selectedDay) && "text-white",
+                        !isEqual(day, selectedDay) &&
+                          isToday(day) &&
+                          "text-red-500",
+                        !isEqual(day, selectedDay) &&
+                          !isToday(day) &&
+                          isSameMonth(day, firstDayCurrentMonth) &&
+                          "text-gray-900",
+                        !isEqual(day, selectedDay) &&
+                          !isToday(day) &&
+                          !isSameMonth(day, firstDayCurrentMonth) &&
+                          "text-gray-400",
+                        isEqual(day, selectedDay) &&
+                          isToday(day) &&
+                          "bg-red-500",
+                        isEqual(day, selectedDay) &&
+                          !isToday(day) &&
+                          "bg-gray-900",
+                        !isEqual(day, selectedDay) && "hover:bg-gray-200",
+                        (isEqual(day, selectedDay) || isToday(day)) &&
+                          "font-semibold",
+                        "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                      )}
+                    >
+                      <time dateTime={format(day, "yyyy-MM-dd")}>
+                        {format(day, "d")}
+                      </time>
+                    </button>
 
-                  <div className="mx-auto mt-1 h-1 w-1">
-                    {meetings.some((meeting) =>
-                      isSameDay(parseISO(meeting.startDatetime), day)
-                    ) && (
-                      <div className="h-1 w-1 rounded-full bg-sky-500"></div>
-                    )}
+                    <div className="mx-auto mt-1 h-1 w-1">
+                      {meetings.some((meeting) =>
+                        isSameDay(parseISO(meeting.startDatetime), day)
+                      ) && (
+                        <div className="h-1 w-1 rounded-full bg-sky-500"></div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="mt-4">
+                <a
+                  className="group flex items-center justify-between rounded-lg border border-red-500 bg-red-500 px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring"
+                  onClick={handleChange}
+                >
+                  <span className="font-medium text-white transition-colors group-hover:text-red-500 group-active:text-indigo-500">
+                    Create
+                  </span>
+
+                  <span className="ml-4 flex-shrink-0 rounded-full border border-current bg-white p-2 text-red-500 group-active:text-indigo-500">
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </div>
             </div>
+            <section className="mt-12 md:mt-0 md:pl-14">
+              <h2 className="font-semibold text-gray-900">
+                Schedule for{" "}
+                <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
+                  {format(selectedDay, "MMM dd, yyy")}
+                </time>
+              </h2>
+              <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+                {selectedDayMeetings.length > 0 ? (
+                  selectedDayMeetings.map((meeting) => (
+                    <Meeting meeting={meeting} key={meeting.id} />
+                  ))
+                ) : (
+                  <p>No meetings for today.</p>
+                )}
+              </ol>
+            </section>
           </div>
-          <section className="mt-12 md:mt-0 md:pl-14">
-            <h2 className="font-semibold text-gray-900">
-              Schedule for{" "}
-              <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-                {format(selectedDay, "MMM dd, yyy")}
-              </time>
-            </h2>
-            <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-              {selectedDayMeetings.length > 0 ? (
-                selectedDayMeetings.map((meeting) => (
-                  <Meeting meeting={meeting} key={meeting.id} />
-                ))
-              ) : (
-                <p>No meetings for today.</p>
-              )}
-            </ol>
-          </section>
         </div>
       </div>
     </div>
