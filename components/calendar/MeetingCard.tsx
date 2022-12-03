@@ -12,20 +12,26 @@ const MeetingCard = ({ meeting }: any) => {
   let endDateTime = parseISO(meeting.endDatetime);
 
   return (
-    <li className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-lightPrimary hover:bg-lightPrimary">
+    <li className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-primary hover:bg-primary">
       <img
         src={meeting.imageUrl}
         alt=""
         className="h-10 w-10 flex-none rounded-full"
       />
       <div className="flex-auto">
-        <p className="text-primary">{meeting.name}</p>
+        <p className="text-black group-hover:text-white">{meeting.name}</p>
         <p className="mt-0.5">
-          <time className="text-primary" dateTime={meeting.startDatetime}>
+          <time
+            className="text-black group-hover:text-white"
+            dateTime={meeting.startDatetime}
+          >
             {format(startDateTime, "h:mm a")}
           </time>{" "}
           -{" "}
-          <time className="text-primary" dateTime={meeting.endDatetime}>
+          <time
+            className="text-black group-hover:text-white"
+            dateTime={meeting.endDatetime}
+          >
             {format(endDateTime, "h:mm a")}
           </time>
         </p>
@@ -35,8 +41,10 @@ const MeetingCard = ({ meeting }: any) => {
         className="relative opacity-0 focus-within:opacity-100 group-hover:opacity-100"
       >
         <div>
-          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-primary hover:text-primary">
-            <span className="sr-only text-black">Open options</span>
+          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-black group-hover:text-white ">
+            <span className="sr-only text-black group-hover:text-white">
+              Open options
+            </span>
             <AdjustmentsVerticalIcon className="h-6 w-6" aria-hidden="true" />
           </Menu.Button>
         </div>
@@ -57,7 +65,9 @@ const MeetingCard = ({ meeting }: any) => {
                   <a
                     href="#"
                     className={classNames([
-                      active ? "bg-primary text-white" : "text-primary",
+                      active
+                        ? "bg-black text-white"
+                        : "text-black group-hover:text-white",
                       "block px-4 py-2 text-sm",
                     ])}
                   >
@@ -70,7 +80,9 @@ const MeetingCard = ({ meeting }: any) => {
                   <a
                     href="#"
                     className={classNames([
-                      active ? "bg-primary  text-white" : "text-primary",
+                      active
+                        ? "bg-black  text-white"
+                        : "text-black group-hover:text-white",
                       "block px-4 py-2 text-sm",
                     ])}
                   >

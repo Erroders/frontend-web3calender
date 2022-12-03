@@ -9,14 +9,14 @@ module.exports = {
     extend: {
       colors: {
         transparent: "transparent",
-        primary: "#344E41",
+        primary: "#DB6EEF",
         secondary: "#3A5A40",
         tertiory: "#588157",
-        lightPrimary: "#A3B18A",
+        lightPrimary: "#D49BDE",
         lightSecondary: "#DAD7CD",
 
         white: "#FFFFFF",
-        black: "#000000",
+        black: "#252525",
       },
     },
   },
