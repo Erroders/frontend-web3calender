@@ -1,16 +1,28 @@
+import Datepicker from "react-tailwindcss-datepicker";
+import { useState } from "react";
 export default function Form() {
+  const [value, setValue] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+
+  const handleValueChange = (newValue: any) => {
+    console.log("newValue:", newValue);
+    setValue(newValue);
+  };
+
   return (
     <section className="">
       <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8  lg:grid-cols-5">
-          <div className="rounded-lg bg-white p-8 shadow-lg lg:col-span-5 lg:p-12">
+          <div className="rounded-lg bg-white p-8 shadow-lg  lg:col-span-5 lg:p-12">
             <form action="" className="space-y-4">
               <div>
-                <label className="sr-only" htmlFor="name">
+                <label className="sr-only text-primary" htmlFor="name">
                   Name
                 </label>
                 <input
-                  className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  className="w-full rounded-lg border-primary p-3 text-sm "
                   placeholder="Name"
                   type="text"
                   id="name"
@@ -23,7 +35,7 @@ export default function Form() {
                     Email
                   </label>
                   <input
-                    className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                    className="w-full rounded-lg border-primary p-3 text-sm"
                     placeholder="Email address"
                     type="email"
                     id="email"
@@ -35,12 +47,19 @@ export default function Form() {
                     Phone
                   </label>
                   <input
-                    className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                    className="w-full rounded-lg border-primary p-3 text-sm"
                     placeholder="Phone Number"
                     type="tel"
                     id="phone"
                   />
                 </div>
+              </div>
+              <div>
+                <Datepicker
+                  primaryColor="fuchsia"
+                  value={value}
+                  onChange={handleValueChange}
+                />
               </div>
 
               <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
@@ -53,7 +72,7 @@ export default function Form() {
                   />
                   <label
                     htmlFor="option1"
-                    className="block w-full rounded-lg border border-gray-200 p-3"
+                    className="block w-full rounded-lg border border-primary p-3"
                     tabIndex={0}
                   >
                     <span className="text-sm font-medium"> Option 1 </span>
@@ -69,7 +88,7 @@ export default function Form() {
                   />
                   <label
                     htmlFor="option2"
-                    className="block w-full rounded-lg border border-gray-200 p-3"
+                    className="block w-full rounded-lg border border-primary p-3"
                     tabIndex={0}
                   >
                     <span className="text-sm font-medium"> Option 2 </span>
@@ -85,7 +104,7 @@ export default function Form() {
                   />
                   <label
                     htmlFor="option3"
-                    className="block w-full rounded-lg border border-gray-200 p-3"
+                    className="block w-full rounded-lg border border-primary p-3"
                     tabIndex={0}
                   >
                     <span className="text-sm font-medium"> Option 3 </span>
@@ -98,7 +117,7 @@ export default function Form() {
                   Message
                 </label>
                 <textarea
-                  className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  className="w-full rounded-lg border-primary p-3 text-sm"
                   placeholder="Message"
                   rows={8}
                   id="message"
@@ -106,27 +125,11 @@ export default function Form() {
               </div>
 
               <div className="mt-4">
-                <button
-                  type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
-                >
-                  <span className="font-medium"> Create Event </span>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="ml-3 h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </button>
+                <a className=" group flex w-36 items-center justify-between rounded-lg border border-primary bg-primary px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring">
+                  <span className="font-medium text-white transition-colors group-hover:text-primary group-active:text-secondary">
+                    Create Event
+                  </span>
+                </a>
               </div>
             </form>
           </div>
