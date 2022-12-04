@@ -2,35 +2,37 @@ import { Menu, Transition } from "@headlessui/react";
 
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
 
-import { parseISO } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 import { Fragment } from "react";
-import { format } from "util";
 import { classNames } from "../../utils/calendarParsers";
+import { Web3Event } from "../../utils/types";
 
-const MeetingCard = ({ meeting }: any) => {
-  let startDateTime = parseISO(meeting.startDatetime);
-  let endDateTime = parseISO(meeting.endDatetime);
+const MeetingCard = ({ meeting }: { meeting: Web3Event }) => {
+  let startDateTime = fromUnixTime(parseInt(meeting.startTime));
+  let endDateTime = fromUnixTime(parseInt(meeting.endTime));
+
+  console.log(meeting);
 
   return (
     <li className="group flex items-center space-x-4 rounded-xl px-4 py-2 focus-within:bg-primary hover:bg-primary">
       <img
-        src={meeting.imageUrl}
+        src={meeting.id}
         alt=""
         className="h-10 w-10 flex-none rounded-full"
       />
       <div className="flex-auto">
-        <p className="text-black group-hover:text-white">{meeting.name}</p>
+        <p className="text-black group-hover:text-white">{meeting.creator}</p>
         <p className="mt-0.5">
           <time
             className="text-black group-hover:text-white"
-            dateTime={meeting.startDatetime}
+            dateTime={meeting.startTime}
           >
             {format(startDateTime, "h:mm a")}
           </time>{" "}
           -{" "}
           <time
             className="text-black group-hover:text-white"
-            dateTime={meeting.endDatetime}
+            dateTime={meeting.endTime}
           >
             {format(endDateTime, "h:mm a")}
           </time>
