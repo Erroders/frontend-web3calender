@@ -4,13 +4,13 @@ import {
   eachDayOfInterval,
   endOfMonth,
   format,
+  fromUnixTime,
   getDay,
   isEqual,
   isSameDay,
   isSameMonth,
   isToday,
   parse,
-  parseISO,
   startOfToday,
 } from "date-fns";
 import { useState } from "react";
@@ -19,49 +19,50 @@ import MeetingCard from "../components/calendar/MeetingCard";
 import Form from "../components/form/form";
 import { Heading1, Heading2 } from "../components/headings/headings";
 import { classNames } from "../utils/calendarParsers";
+import { Web3Event } from "../utils/types";
 
-const meetings = [
-  {
-    id: 1,
-    name: "Leslie Alexander",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-12-11T13:00",
-    endDatetime: "2022-12-11T14:30",
-  },
-  {
-    id: 2,
-    name: "Michael Foster",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-12-11T16:00",
-    endDatetime: "2022-12-11T19:30",
-  },
-  {
-    id: 3,
-    name: "Dries Vincent",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-20T17:00",
-    endDatetime: "2022-05-20T18:30",
-  },
-  {
-    id: 4,
-    name: "Leslie Alexander",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-12-11T20:00",
-    endDatetime: "2022-12-11T20:30",
-  },
-  {
-    id: 5,
-    name: "Michael Foster",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-13T14:00",
-    endDatetime: "2022-05-13T14:30",
-  },
-];
+// const meetings = [
+//   {
+//     id: 1,
+//     name: "Leslie Alexander",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+//     startDatetime: "2022-12-11T13:00",
+//     endDatetime: "2022-12-11T14:30",
+//   },
+//   {
+//     id: 2,
+//     name: "Michael Foster",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+//     startDatetime: "2022-12-11T16:00",
+//     endDatetime: "2022-12-11T19:30",
+//   },
+//   {
+//     id: 3,
+//     name: "Dries Vincent",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+//     startDatetime: "2022-05-20T17:00",
+//     endDatetime: "2022-05-20T18:30",
+//   },
+//   {
+//     id: 4,
+//     name: "Leslie Alexander",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+//     startDatetime: "2022-12-11T20:00",
+//     endDatetime: "2022-12-11T20:30",
+//   },
+//   {
+//     id: 5,
+//     name: "Michael Foster",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+//     startDatetime: "2022-05-13T14:00",
+//     endDatetime: "2022-05-13T14:30",
+//   },
+// ];
 
 let colStartClasses = [
   "",
@@ -73,7 +74,7 @@ let colStartClasses = [
   "col-start-7",
 ];
 
-const Calendar = () => {
+const Calendar = ({ meetings }: { meetings: Web3Event[] }) => {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -97,13 +98,27 @@ const Calendar = () => {
   }
 
   let selectedDayMeetings = meetings.filter((meeting) =>
-    isSameDay(parseISO(meeting.startDatetime), selectedDay)
+    isSameDay(fromUnixTime(parseInt(meeting.startTime)), selectedDay)
   );
 
   let handleChange = () => {
     setVisible("visible");
     setInvisible("collapse");
   };
+
+  meetings.forEach((value) => {
+    // console.log(parseISO(new Date(value.startTime).toDateString()));
+    // console.log(value.startTime);
+    // console.log(fromUnixTime(value.startTime));
+
+    console.log(
+      isSameDay(fromUnixTime(parseInt(value.startTime)), selectedDay)
+    );
+    // console.log(
+    //   parseISO(fromUnixTime(parseInt(value.startTime)).toDateString())
+    // );
+    console.log(selectedDay);
+  });
 
   return (
     <div>
@@ -196,7 +211,10 @@ const Calendar = () => {
 
                       <div className="mx-auto mt-1 h-1 w-1">
                         {meetings.some((meeting) =>
-                          isSameDay(parseISO(meeting.startDatetime), day)
+                          isSameDay(
+                            fromUnixTime(parseInt(meeting.startTime)),
+                            selectedDay
+                          )
                         ) && (
                           <div className="h-1 w-1 rounded-full bg-lightPrimary"></div>
                         )}

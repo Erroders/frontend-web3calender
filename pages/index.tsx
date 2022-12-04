@@ -1,14 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import Navbar from "../components/navbar";
 import { executeQuery } from "../utils/apolloClient";
 import { fetchWeb3Events } from "../utils/queries/fetchWeb3Events";
+import { Web3Event } from "../utils/types";
 import Calendar from "./calendar";
 
 export default function Home() {
-  //
-
   const { address, isConnected } = useAccount();
+
+  const [events, setEvents] = useState<Web3Event[]>([]);
 
   useEffect(() => {
     // isConnected &&
@@ -19,7 +20,8 @@ export default function Home() {
       })
     )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setEvents(res.web3Events as Array<Web3Event>);
       })
       .catch((err) => {
         console.log(err);
@@ -30,11 +32,7 @@ export default function Home() {
     <div>
       <Navbar />
       <main>
-        {/* 
-      
-        */}
-
-        <Calendar />
+        <Calendar meetings={events} />
       </main>
     </div>
   );
