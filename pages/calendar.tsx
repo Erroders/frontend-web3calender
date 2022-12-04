@@ -106,20 +106,6 @@ const Calendar = ({ meetings }: { meetings: Web3Event[] }) => {
     setInvisible("collapse");
   };
 
-  meetings.forEach((value) => {
-    // console.log(parseISO(new Date(value.startTime).toDateString()));
-    // console.log(value.startTime);
-    // console.log(fromUnixTime(value.startTime));
-
-    console.log(
-      isSameDay(fromUnixTime(parseInt(value.startTime)), selectedDay)
-    );
-    // console.log(
-    //   parseISO(fromUnixTime(parseInt(value.startTime)).toDateString())
-    // );
-    console.log(selectedDay);
-  });
-
   return (
     <div>
       <div className={`${invisible}`}>
@@ -213,7 +199,7 @@ const Calendar = ({ meetings }: { meetings: Web3Event[] }) => {
                         {meetings.some((meeting) =>
                           isSameDay(
                             fromUnixTime(parseInt(meeting.startTime)),
-                            selectedDay
+                            day
                           )
                         ) && (
                           <div className="h-1 w-1 rounded-full bg-lightPrimary"></div>
