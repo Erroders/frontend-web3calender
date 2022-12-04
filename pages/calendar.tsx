@@ -26,16 +26,16 @@ const meetings = [
     name: "Leslie Alexander",
     imageUrl:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-11T13:00",
-    endDatetime: "2022-05-11T14:30",
+    startDatetime: "2022-12-11T13:00",
+    endDatetime: "2022-12-11T14:30",
   },
   {
     id: 2,
     name: "Michael Foster",
     imageUrl:
       "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-05-20T09:00",
-    endDatetime: "2022-05-20T11:30",
+    startDatetime: "2022-12-11T16:00",
+    endDatetime: "2022-12-11T19:30",
   },
   {
     id: 3,
@@ -50,8 +50,8 @@ const meetings = [
     name: "Leslie Alexander",
     imageUrl:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-06-09T13:00",
-    endDatetime: "2022-06-09T14:30",
+    startDatetime: "2022-12-11T20:00",
+    endDatetime: "2022-12-11T20:30",
   },
   {
     id: 5,
@@ -119,8 +119,8 @@ const Calendar = () => {
           <Form />
         </div>
         <div className={`pb-16 pt-8 ${invisible}`}>
-          <div className=" mx-auto  max-w-md px-4 sm:px-7 md:max-w-4xl md:px-6">
-            <div className=" md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
+          <div className=" mx-auto  max-w-md px-4 sm:px-7 md:max-w-7xl md:px-6">
+            <div className=" md:grid md:grid-cols-3 md:divide-x md:divide-gray-200">
               <div className="md:pr-14">
                 <div className="flex items-center">
                   <h2 className="flex-auto font-semibold text-primary">
@@ -232,7 +232,7 @@ const Calendar = () => {
                   </a>
                 </div>
               </div>
-              <section className="mt-12 md:mt-0 md:pl-14">
+              <section className=" col-span-2 mt-12 md:mt-0 md:pl-14">
                 <h2 className="font-semibold text-primary">
                   Schedule for{" "}
                   <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
