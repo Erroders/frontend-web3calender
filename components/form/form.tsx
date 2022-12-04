@@ -1,5 +1,5 @@
-import Datepicker from "react-tailwindcss-datepicker";
 import { useState } from "react";
+import Datepicker from "react-tailwindcss-datepicker";
 
 export default function Form() {
   const [value, setValue] = useState({
@@ -17,7 +17,7 @@ export default function Form() {
       <div className="mx-auto max-w-screen-xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8  lg:grid-cols-5">
           <div className="rounded-lg bg-white p-8 shadow-lg  lg:col-span-5 lg:p-12">
-            <form action="" className="space-y-4">
+            <div className="space-y-4">
               <div>
                 <label className="sr-only text-primary" htmlFor="title">
                   Title
@@ -144,7 +144,7 @@ export default function Form() {
                   </span>
                 </a>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

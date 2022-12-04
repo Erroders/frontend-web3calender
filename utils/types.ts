@@ -13,3 +13,27 @@ export type PushNotificationFeed = {
   title: string;
   url: string;
 };
+
+export type Web3Event = {
+  creator: string;
+  description: string;
+  endTime: string;
+  id: string;
+  recipientList: string;
+  startTime: string;
+  title: string;
+  attendees: Attendee[];
+  comments: Comment[];
+};
+
+export type Attendee = {
+  address: string;
+  id: string;
+  rsvpResponse: string;
+  status: string;
+};
+
+export type Comment = {
+  postedOn: string;
+  comment: string;
+};
