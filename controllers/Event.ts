@@ -1,5 +1,6 @@
 import ethers from "ethers";
 import { abi } from "../../contracts-web3calender/artifacts/contracts/Event.sol/Event.json";
+import { uploadToIpfs } from "../utils/ipfs";
 
 enum RSVPResponse {
     YES = 1,
@@ -10,7 +11,7 @@ enum RSVPResponse {
 export async function modifyStartTime(
     contractAddr: string,
     signer: ethers.Signer,
-    time: string
+    time: number
 ) {
     const contract = new ethers.Contract(contractAddr, abi, signer);
     await contract.modifyStartTime(time);
@@ -36,7 +37,10 @@ export async function modifyEvent(
     }
 ) {
     const contract = new ethers.Contract(contractAddr, abi, signer);
-    const metadataCid = "";
+    const metadataCid = await uploadToIpfs({
+        title: title,
+        description: description,
+    });
     await contract.modifyStartTime(metadataCid);
 }
 
